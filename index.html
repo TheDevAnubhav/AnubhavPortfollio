@@ -280,6 +280,74 @@
             background: transparent; 
         }
 
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 100;
+        }
+        .hamburger .bar {
+            width: 26px;
+            height: 3px;
+            background: var(--text-primary);
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: 0.4s;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.6rem;
+        }
+        @media (max-width: 800px) {
+            .site-nav {
+                justify-content: flex-end;
+                padding-right: 1rem;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .nav-links {
+                position: absolute;
+                top: 60px;
+                right: 16px;
+                background: linear-gradient(135deg, var(--dark-blue, #1a1f36) 80%, var(--accent, #00d4ff) 100%);
+                border: 1.5px solid var(--accent, #00d4ff);
+                box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+                border-radius: 18px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+                min-width: 180px;
+                padding: 1rem 0.7rem;
+                z-index: 99;
+                display: none;
+                backdrop-filter: blur(8px);
+                transition: background 0.3s, border 0.3s;
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .nav-link {
+                width: 100%;
+                padding: 0.7rem 0.5rem;
+                font-size: 1.1rem;
+                color: var(--text-primary, #fff) !important;
+                background: transparent;
+                border-radius: 8px;
+                transition: background 0.2s, color 0.2s;
+            }
+            .nav-link:hover, .nav-link:focus-visible {
+                background: var(--accent, #00d4ff);
+                color: #1a1f36 !important;
+            }
+        }
         .nav-link { position:relative; color:var(--text-secondary); text-decoration:none; font-weight:500; padding:0.35rem 0.2rem; line-height:1; }
         .nav-link::after { content:""; position:absolute; left:50%; bottom:0; width:0; height:2px; background:var(--accent); border-radius:2px; transition:width .35s ease, left .35s ease; }
         .nav-link:hover, .nav-link:focus-visible { color:var(--text-primary); }
@@ -551,10 +619,10 @@
         /* Footer */
         .footer {
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 1.2rem 1rem 1rem 1rem;
             color: var(--text-muted);
             border-top: none;
-            margin-top: 5rem;
+            margin-top: -3rem;
         }
 
         /* Animations */
@@ -660,25 +728,34 @@
             ]
         }
         </script>
+<script>
+// Hamburger menu toggle (moved to end of body)
+</script>
 </head>
     <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="bg-animation"></div>
     <div class="particles" id="particles"></div>
     <div class="site-wrapper" style="padding-top: 32px;">
         <nav id="nav" class="site-nav" aria-label="Primary">
-            <a class="nav-link" href="#experience">Experience</a>
-            <a class="nav-link" href="#skills">Skills</a>
-            <a class="nav-link" href="#responsibilities">Responsibilities</a>
-            <a class="nav-link" href="#contact">Contact</a>
-                        <button id="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle theme">
-                            <span class="visually-hidden">Toggle color theme</span>
-                            <span class="theme-toggle-track" aria-hidden="true">
-                                <span class="theme-toggle-icon sun"><i class="fas fa-sun" aria-hidden="true"></i></span>
-                                <span class="theme-toggle-icon moon"><i class="fas fa-moon" aria-hidden="true"></i></span>
-                                <span class="theme-toggle-knob"></span>
-                            </span>
-                        </button>
+            <button class="hamburger" id="hamburger-menu" aria-label="Open navigation" aria-controls="nav-links" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a class="nav-link" href="#experience">Experience</a>
+                <a class="nav-link" href="#skills">Skills</a>
+                <a class="nav-link" href="#responsibilities">Responsibilities</a>
+                <a class="nav-link" href="#contact">Contact</a>
+                <button id="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle theme">
+                    <span class="visually-hidden">Toggle color theme</span>
+                    <span class="theme-toggle-track" aria-hidden="true">
+                        <span class="theme-toggle-icon sun"><i class="fas fa-sun" aria-hidden="true"></i></span>
+                        <span class="theme-toggle-icon moon"><i class="fas fa-moon" aria-hidden="true"></i></span>
+                        <span class="theme-toggle-knob"></span>
+                    </span>
+                </button>
+            </div>
         </nav>
         <header class="header">
             <div class="hero-content">
@@ -1281,14 +1358,14 @@
 
                         // Scroll spy to highlight active nav link
                         const sections = ['experience','skills','responsibilities','contact'].map(id => document.getElementById(id));
-                        const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+                        const navLinkElements = Array.from(document.querySelectorAll('.nav-link'));
                         function onScrollSpy() {
                             const scrollPos = window.scrollY + (window.innerHeight * 0.25); // quarter viewport offset
                             let current = null;
                                 for (const sec of sections) {
                                     if (sec && sec.offsetTop <= scrollPos) current = sec.id;
                                 }
-                            navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+                            navLinkElements.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
                         }
                         window.addEventListener('scroll', onScrollSpy, { passive: true });
                         onScrollSpy();
@@ -1334,6 +1411,24 @@
                 }
             );
         });
+
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger-menu');
+    const navLinks = document.getElementById('nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', function() {
+            const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+            hamburger.setAttribute('aria-expanded', !expanded);
+            navLinks.classList.toggle('open');
+        });
+        // Optional: close menu when a link is clicked (for single-page nav)
+        navLinks.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
     </script>
 </body>
 </html>
