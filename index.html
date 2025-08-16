@@ -711,6 +711,141 @@
                         .skills-table { overflow-x: auto; }
                         .skills-table table { min-width: 620px; }
                 }
+
+                /* Interactive Purpose & Application styles */
+                .purpose-clickable {
+                    cursor: pointer;
+                    position: relative;
+                    padding: 8px 12px;
+                    border-radius: 8px;
+                    transition: all 0.3s ease;
+                    background: var(--glass);
+                    border: 1px solid var(--glass-border);
+                }
+
+                .purpose-clickable:hover {
+                    background: var(--gradient-primary);
+                    transform: translateY(-2px);
+                    box-shadow: var(--shadow);
+                }
+
+                .purpose-clickable::after {
+                    content: '🔍';
+                    position: absolute;
+                    right: 8px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    opacity: 0.6;
+                    font-size: 0.8em;
+                }
+
+                /* Modal styles */
+                .tech-modal {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.8);
+                    z-index: 1000;
+                    backdrop-filter: blur(10px);
+                }
+
+                .modal-content {
+                    position: absolute;
+                    top: 10%;
+                    left: 50%;
+                    transform: translate(-50%, 0);
+                    background: var(--dark-blue);
+                    border-radius: 15px;
+                    padding: 2rem;
+                    max-width: 600px;
+                    width: 90%;
+                    max-height: 80vh;
+                    overflow-y: auto;
+                    border: 1px solid var(--glass-border);
+                    box-shadow: var(--shadow-lg);
+                }
+
+                .modal-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 1.5rem;
+                    padding-bottom: 1rem;
+                    border-bottom: 1px solid var(--glass-border);
+                }
+
+                .modal-title {
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    color: var(--accent);
+                    margin: 0;
+                }
+
+                .modal-close {
+                    background: none;
+                    border: none;
+                    font-size: 1.5rem;
+                    color: var(--text-secondary);
+                    cursor: pointer;
+                    padding: 0.5rem;
+                    border-radius: 50%;
+                    transition: all 0.3s ease;
+                }
+
+                .modal-close:hover {
+                    background: var(--glass);
+                    color: var(--text-primary);
+                    transform: scale(1.1);
+                }
+
+                .modal-section {
+                    margin-bottom: 1.5rem;
+                }
+
+                .modal-section h3 {
+                    color: var(--accent);
+                    margin-bottom: 0.5rem;
+                    font-size: 1.1rem;
+                }
+
+                .modal-section p {
+                    color: var(--text-secondary);
+                    line-height: 1.6;
+                    margin-bottom: 0.8rem;
+                }
+
+                .modal-features {
+                    list-style: none;
+                    padding: 0;
+                }
+
+                .modal-features li {
+                    background: var(--glass);
+                    margin: 0.5rem 0;
+                    padding: 0.8rem 1rem;
+                    border-radius: 8px;
+                    border-left: 3px solid var(--accent);
+                    color: var(--text-secondary);
+                }
+
+                .modal-features li strong {
+                    color: var(--text-primary);
+                }
+
+                @media (max-width: 640px) {
+                    .modal-content {
+                        padding: 1.5rem;
+                        margin: 1rem;
+                        width: calc(100% - 2rem);
+                    }
+                    
+                    .modal-title {
+                        font-size: 1.3rem;
+                    }
+                }
     </style>
         <script type="application/ld+json">
         {
@@ -765,7 +900,7 @@
                 <h1 class="hero-title">Anubhav Mishra</h1>
                 <h2 class="hero-subtitle">Cloud Engineer &amp; Software Developer</h2>
                 <p class="hero-description">
-                    Specialized in building scalable AI-driven solutions with expertise in Python and Java ecosystems.<br>
+                    Specialization in building scalable AI-driven solutions with expertise in Python and Java ecosystems.<br>
                     Leading microservices architecture and orchestration engines at HP with focus on production excellence.
                 </p>
                 <div class="cta-buttons">
@@ -889,48 +1024,92 @@
                         <tbody>
                             <tr>
                                 <td><strong>Python Ecosystem</strong></td>
-                                <td>FastAPI, Flask, Poetry for building high-performance AI services and REST APIs</td>
+                                <td>
+                                    <div class="purpose-clickable" data-tech="python">
+                                        FastAPI, Flask, Poetry for building high-performance AI services and REST APIs
+                                    </div>
+                                </td>
                                 <td><span class="skill-tag">Advanced</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Java Enterprise</strong></td>
-                                <td>Java 21, Spring Boot 3.5, Maven for scalable microservices architecture</td>
+                                <td>
+                                    <div class="purpose-clickable" data-tech="java">
+                                        Java 21, Spring Boot 3.5, Maven for scalable microservices architecture
+                                    </div>
+                                </td>
                                 <td><span class="skill-tag">Advanced</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Cloud Platforms</strong></td>
-                                <td>AWS (Secrets Manager, IAM), Azure AI services for model deployment</td>
+                                <td>
+                                    <div class="purpose-clickable" data-tech="cloud">
+                                        AWS (Secrets Manager, IAM), Azure AI services for model deployment
+                                    </div>
+                                </td>
                                 <td><span class="skill-tag">Advanced</span></td>
                             </tr>
                             <tr>
                                 <td><strong>DevOps & CI/CD</strong></td>
-                                <td>ADO Pipelines, Docker, Terraform for automated deployment and infrastructure</td>
+                                <td>
+                                    <div class="purpose-clickable" data-tech="devops">
+                                        ADO Pipelines, Docker, Terraform for automated deployment and infrastructure
+                                    </div>
+                                </td>
                                 <td><span class="skill-tag">Advanced</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Databases</strong></td>
-                                <td>MongoDB for NoSQL data storage and configuration management</td>
+                                <td>
+                                    <div class="purpose-clickable" data-tech="database">
+                                        MongoDB for NoSQL data storage and configuration management
+                                    </div>
+                                </td>
                                 <td><span class="skill-tag">Advanced</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Monitoring & Logging</strong></td>
-                                <td>Splunk for log analysis, alert creation, and production monitoring</td>
+                                <td>
+                                    <div class="purpose-clickable" data-tech="monitoring">
+                                        Splunk for log analysis, alert creation, and production monitoring
+                                    </div>
+                                </td>
                                 <td><span class="skill-tag">Advanced</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Testing Frameworks</strong></td>
-                                <td>JUnit, Mockito, Jacoco for comprehensive testing and code coverage</td>
+                                <td>
+                                    <div class="purpose-clickable" data-tech="testing">
+                                        JUnit, Mockito, Jacoco for comprehensive testing and code coverage
+                                    </div>
+                                </td>
                                 <td><span class="skill-tag">Advanced</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Security & Auth</strong></td>
-                                <td>JWT authentication, authorization, and grant validation systems</td>
+                                <td>
+                                    <div class="purpose-clickable" data-tech="security">
+                                        JWT authentication, authorization, and grant validation systems
+                                    </div>
+                                </td>
                                 <td><span class="skill-tag">Advanced</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </section>
+
+            <!-- Technology Details Modal -->
+            <div id="tech-modal" class="tech-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="modal-title" class="modal-title"></h2>
+                        <button class="modal-close" aria-label="Close modal">&times;</button>
+                    </div>
+                    <div id="modal-body"></div>
+                </div>
+            </div>
+
             <section id="responsibilities" class="section" data-aos="fade-up" data-aos-duration="1000">
                 <h2 class="section-title" data-aos="flip-up" data-aos-delay="200">Core Responsibilities</h2>
                 <div class="responsibilities-grid">
@@ -1429,6 +1608,277 @@
             });
         });
     }
+
+    // Technology Details Modal Functionality
+    const techDetails = {
+        python: {
+            title: "Python Ecosystem",
+            sections: [
+                {
+                    heading: "Core Technologies",
+                    content: "Advanced Python development using modern frameworks and tools for building scalable, high-performance applications."
+                },
+                {
+                    heading: "Key Features & Applications",
+                    features: [
+                        { name: "FastAPI", description: "Building ultra-fast REST APIs with automatic OpenAPI documentation and async support" },
+                        { name: "Flask", description: "Lightweight web applications and microservices with extensive customization" },
+                        { name: "Poetry", description: "Dependency management and virtual environment handling for consistent deployments" },
+                        { name: "Pydantic", description: "Data validation and serialization with type hints for robust API contracts" },
+                        { name: "Asyncio", description: "Asynchronous programming for high-concurrency applications and I/O operations" }
+                    ]
+                },
+                {
+                    heading: "Real-world Implementation",
+                    content: "Currently implementing AI-driven plugin systems and orchestration engines using FastAPI microservices, handling thousands of concurrent requests with sub-millisecond response times."
+                }
+            ]
+        },
+        java: {
+            title: "Java Enterprise",
+            sections: [
+                {
+                    heading: "Enterprise-Grade Development",
+                    content: "Modern Java development with Spring ecosystem for building robust, scalable microservices architectures."
+                },
+                {
+                    heading: "Key Technologies & Frameworks",
+                    features: [
+                        { name: "Java 21", description: "Latest LTS features including virtual threads, pattern matching, and enhanced performance" },
+                        { name: "Spring Boot 3.5", description: "Auto-configuration, embedded servers, and production-ready microservices" },
+                        { name: "Spring Security", description: "Comprehensive authentication and authorization frameworks" },
+                        { name: "Maven", description: "Project management, dependency resolution, and build automation" },
+                        { name: "JPA/Hibernate", description: "Object-relational mapping and database abstraction layers" }
+                    ]
+                },
+                {
+                    heading: "Architecture & Patterns",
+                    content: "Implementing microservices patterns, dependency injection, AOP, and event-driven architectures for enterprise-scale applications with high availability and fault tolerance."
+                }
+            ]
+        },
+        cloud: {
+            title: "Cloud Platforms",
+            sections: [
+                {
+                    heading: "Multi-Cloud Expertise",
+                    content: "Leveraging AWS and Azure services for scalable, secure, and cost-effective cloud solutions."
+                },
+                {
+                    heading: "AWS Services & Capabilities",
+                    features: [
+                        { name: "Secrets Manager", description: "Secure storage and rotation of API keys, passwords, and database credentials" },
+                        { name: "IAM", description: "Identity and access management with fine-grained permissions and policies" },
+                        { name: "EC2 & Auto Scaling", description: "Elastic compute resources with automatic scaling based on demand" },
+                        { name: "S3 & CloudFront", description: "Object storage and global content delivery networks" },
+                        { name: "Lambda", description: "Serverless computing for event-driven microservices" }
+                    ]
+                },
+                {
+                    heading: "Azure AI Integration",
+                    content: "Deploying and managing AI/ML models using Azure Cognitive Services, Azure ML, and custom model endpoints for intelligent application features."
+                }
+            ]
+        },
+        devops: {
+            title: "DevOps & CI/CD",
+            sections: [
+                {
+                    heading: "Automated Deployment Pipeline",
+                    content: "End-to-end automation for continuous integration, testing, and deployment across multiple environments."
+                },
+                {
+                    heading: "Tools & Technologies",
+                    features: [
+                        { name: "Azure DevOps Pipelines", description: "Multi-stage YAML pipelines with parallel jobs and environment gates" },
+                        { name: "Docker", description: "Containerization for consistent deployments across development and production" },
+                        { name: "Terraform", description: "Infrastructure as Code for reproducible, version-controlled cloud resources" },
+                        { name: "Kubernetes", description: "Container orchestration with auto-scaling, service discovery, and load balancing" },
+                        { name: "Git & GitFlow", description: "Version control with branching strategies and automated code quality checks" }
+                    ]
+                },
+                {
+                    heading: "Deployment Strategy",
+                    content: "Blue-green deployments, canary releases, and automated rollback mechanisms ensuring zero-downtime updates and rapid recovery from failures."
+                }
+            ]
+        },
+        database: {
+            title: "Database Technologies",
+            sections: [
+                {
+                    heading: "NoSQL & Document Storage",
+                    content: "Advanced MongoDB implementations for flexible, scalable data storage solutions."
+                },
+                {
+                    heading: "MongoDB Expertise",
+                    features: [
+                        { name: "Document Design", description: "Optimal schema design for complex nested data structures and relationships" },
+                        { name: "Aggregation Pipelines", description: "Complex data processing and analytics using MongoDB's aggregation framework" },
+                        { name: "Indexing Strategy", description: "Performance optimization through compound indexes and query planning" },
+                        { name: "Replication & Sharding", description: "High availability and horizontal scaling across multiple servers" },
+                        { name: "GridFS", description: "Large file storage and retrieval for multimedia and document management" }
+                    ]
+                },
+                {
+                    heading: "Use Cases",
+                    content: "Configuration management systems, user session storage, real-time analytics, and content management with dynamic schemas for rapid development cycles."
+                }
+            ]
+        },
+        monitoring: {
+            title: "Monitoring & Logging",
+            sections: [
+                {
+                    heading: "Production Observability",
+                    content: "Comprehensive monitoring, logging, and alerting systems for maintaining high-availability services."
+                },
+                {
+                    heading: "Splunk Implementation",
+                    features: [
+                        { name: "Log Aggregation", description: "Centralized collection and parsing of application, system, and security logs" },
+                        { name: "Real-time Analytics", description: "Live dashboards and KPI monitoring with custom metrics and visualizations" },
+                        { name: "Alert Management", description: "Intelligent alerting with escalation policies and automated incident response" },
+                        { name: "Performance Monitoring", description: "Application performance metrics, response times, and resource utilization" },
+                        { name: "Security Analytics", description: "Threat detection, anomaly identification, and compliance reporting" }
+                    ]
+                },
+                {
+                    heading: "Operational Excellence",
+                    content: "Proactive monitoring strategies, automated root cause analysis, and data-driven capacity planning for optimal system performance and reliability."
+                }
+            ]
+        },
+        testing: {
+            title: "Testing Frameworks",
+            sections: [
+                {
+                    heading: "Comprehensive Testing Strategy",
+                    content: "Multi-layered testing approach ensuring code quality, reliability, and maintainability across the development lifecycle."
+                },
+                {
+                    heading: "Testing Tools & Frameworks",
+                    features: [
+                        { name: "JUnit 5", description: "Modern unit testing with parameterized tests, dynamic tests, and lifecycle management" },
+                        { name: "Mockito", description: "Mock object creation and behavior verification for isolated unit testing" },
+                        { name: "Jacoco", description: "Code coverage analysis with detailed reporting and quality gates" },
+                        { name: "TestContainers", description: "Integration testing with real database and service dependencies" },
+                        { name: "REST Assured", description: "API testing framework for validating REST services and response contracts" }
+                    ]
+                },
+                {
+                    heading: "Quality Assurance",
+                    content: "Test-driven development (TDD), behavior-driven development (BDD), and automated testing pipelines with coverage thresholds and quality gates for continuous integration."
+                }
+            ]
+        },
+        security: {
+            title: "Security & Authentication",
+            sections: [
+                {
+                    heading: "Enterprise Security Framework",
+                    content: "Robust authentication, authorization, and security validation systems for protecting enterprise applications and data."
+                },
+                {
+                    heading: "Security Implementation",
+                    features: [
+                        { name: "JWT Authentication", description: "Stateless token-based authentication with refresh token rotation and claims validation" },
+                        { name: "OAuth 2.0 & OIDC", description: "Industry-standard authorization framework with OpenID Connect identity layer" },
+                        { name: "Role-Based Access Control", description: "Granular permission system with hierarchical roles and resource-based authorization" },
+                        { name: "API Security", description: "Rate limiting, input validation, SQL injection prevention, and secure headers" },
+                        { name: "Encryption & Hashing", description: "Data encryption at rest and in transit with secure password hashing algorithms" }
+                    ]
+                },
+                {
+                    heading: "Compliance & Best Practices",
+                    content: "Implementation of security best practices including OWASP guidelines, GDPR compliance, audit logging, and vulnerability assessment protocols."
+                }
+            ]
+        }
+    };
+
+    // Modal functionality
+    const modal = document.getElementById('tech-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    const closeBtn = document.querySelector('.modal-close');
+
+    function openModal(techKey) {
+        const tech = techDetails[techKey];
+        if (!tech) return;
+
+        modalTitle.textContent = tech.title;
+        
+        let bodyHTML = '';
+        tech.sections.forEach(section => {
+            bodyHTML += `<div class="modal-section">`;
+            bodyHTML += `<h3>${section.heading}</h3>`;
+            
+            if (section.content) {
+                bodyHTML += `<p>${section.content}</p>`;
+            }
+            
+            if (section.features) {
+                bodyHTML += `<ul class="modal-features">`;
+                section.features.forEach(feature => {
+                    bodyHTML += `<li><strong>${feature.name}:</strong> ${feature.description}</li>`;
+                });
+                bodyHTML += `</ul>`;
+            }
+            
+            bodyHTML += `</div>`;
+        });
+        
+        modalBody.innerHTML = bodyHTML;
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+
+        // Animate modal in
+        gsap.fromTo(modal, 
+            { opacity: 0 }, 
+            { opacity: 1, duration: 0.3, ease: 'power2.out' }
+        );
+        gsap.fromTo('.modal-content', 
+            { scale: 0.8, y: 50 }, 
+            { scale: 1, y: 0, duration: 0.4, ease: 'back.out(1.7)' }
+        );
+    }
+
+    function closeModal() {
+        gsap.to(modal, {
+            opacity: 0,
+            duration: 0.3,
+            ease: 'power2.out',
+            onComplete: () => {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
+    // Event listeners
+    document.querySelectorAll('.purpose-clickable').forEach(element => {
+        element.addEventListener('click', () => {
+            const techKey = element.getAttribute('data-tech');
+            openModal(techKey);
+        });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Close modal with escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'block') {
+            closeModal();
+        }
+    });
+
     </script>
 </body>
 </html>
